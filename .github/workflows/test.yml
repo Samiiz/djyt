@@ -1,4 +1,4 @@
-name: Checks # Workflow 이름
+name: Checks
 
 on: [push] # git push 이벤트 활성화 -> 레포지토리에 push를 했을 때 활성화
 
