@@ -13,9 +13,18 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USER }}
           password: ${{ secrets.DOCKER_TOKEN }}
+      
+      - name: install docker-compose
+        run: |
+          sudo apt install -y docker-compose
+      
       - name: Checkout # 깃헙 레포에 있는 코드를 작업 환경으로 가져오는 역할
         uses: actions/checkout@v2
+        
+      - name: docker build
+        run: docker-compose build app
+
       - name: Test # 테스트 코드 실행
-        run: docker-compose run --rm app sh -c "python manage.py test"
+        run: docker-compose run --rm app python manage.py test
       # - name: Lint # pep8 파이썬 코드 스타일 가이드 준수 여부 검사
         # run: docker-compose run --rm app sh -c "flake8"
